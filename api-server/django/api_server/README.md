@@ -4,7 +4,7 @@
   | Column Name   | Data Type   | Constraints |
   |---------------|-------------|-------------|
   | _id           | INT         | PK, AI      |
-  | user_id       | VARCHAR(20) | PK, AI      |
+  | user_id       | VARCHAR(20) | UQ          |
   | password      | VARCHAR(20) | NN          |
   | best_score    | INT         | NN          |
   | average_score | DOUBLE      | NN          |
