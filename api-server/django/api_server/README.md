@@ -13,10 +13,11 @@
 
 - games
 
-  | Column Name  | Data Type | Constraints        |
-  |--------------|-----------|--------------------|
-  | _id          | INT       | PK, FK (users._id) |
-  | when_played  | DATETIME  | PK, NN             |
-  | kill_count   | INT       | NN                 |
-  | elapsed_time | DOUBLE    | NN                 |
-  | score        | INT       | NN                 |
+  | Column Name  | Data Type   | Constraints        |
+  |--------------|-------------|--------------------|
+  | _id          | INT         | PK, AI             |
+  | user_id      | VARCHAR(20) | FK (users.user_id) |
+  | when_played  | DATETIME    | NN                 |
+  | kill_count   | INT         | NN                 |
+  | elapsed_time | DOUBLE      | NN                 |
+  | score        | INT         | NN                 |
