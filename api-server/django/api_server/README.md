@@ -172,7 +172,7 @@
   - Body:
     ```json
     {
-      "user_id": 1
+      "user_or_game_id": 1
     }
     ```
 - Response
@@ -211,7 +211,7 @@
   - Body:
     ```json
     {
-      "game_id": 23
+      "user_or_game_id": 23
     }
     ```
 - Response
@@ -250,7 +250,7 @@
   - Body:
     ```json
     {
-      "user_id": 1
+      "user_or_game_id": 1
     }
     ```
 - Response
