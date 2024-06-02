@@ -12,7 +12,5 @@
       - import random
       - import math
       - import requests
-      - import json
-      - import os
       - from PIL import Image
       - from datetime import datetime
