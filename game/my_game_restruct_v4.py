@@ -12,7 +12,7 @@ from datetime import datetime
 accounts = [('admin','password')]
 class Airplane():
     def __init__(self, x, y):
-        self.image = pygame.image.load('C:/Users/MSI/DE30-3nd-4/game/source/plane.png')  # 비행기 이미지 로드
+        self.image = pygame.image.load('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/plane.png')  # 비행기 이미지 로드
         self.image = pygame.transform.scale(self.image, (37, 37)).convert_alpha()
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
@@ -28,7 +28,7 @@ class Airplane():
 
 class Missile:
     def __init__(self, x, y):
-        self.image = pygame.image.load('C:/Users/MSI/DE30-3nd-4/game/source/bullet_1.png')
+        self.image = pygame.image.load('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/bullet_1.png')
         self.image = pygame.transform.scale(self.image, (20, 20))
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
@@ -43,7 +43,7 @@ class Missile:
 
 class Ailens:
     def __init__(self, screen_width):
-        self.image = pygame.image.load('C:/Users/MSI/DE30-3nd-4/game/source/enemy.png')
+        self.image = pygame.image.load('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/enemy.png')
         self.image = pygame.transform.scale(self.image, (30, 30))
         self.rect = self.image.get_rect()
         self.rect.x = random.randrange(screen_width - self.rect.width)  # x 위치 랜덤 설정
@@ -59,7 +59,7 @@ class Ailens:
 
 class Red_Aliens():
     def __init__(self, screen_width):
-        self.image = pygame.image.load('C:/Users/MSI/DE30-3nd-4/game/source/red_enemy.png')
+        self.image = pygame.image.load('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/red_enemy.png')
         self.image = pygame.transform.scale(self.image, (30, 30))
         self.rect = self.image.get_rect()
         self.rect.x = random.randrange(screen_width - self.rect.width)  # x 위치 랜덤 설정
@@ -77,13 +77,13 @@ class Red_Aliens():
 
 class Health_point:
     def __init__(self, x, y):
-        self.image = pygame.image.load('C:/Users/MSI/DE30-3nd-4/game/source/hp.png')
+        self.image = pygame.image.load('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/hp.png')
         self.image = pygame.transform.scale(self.image, (40, 20))
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
 
     def draw_hp(self, screen, hp):
-        font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 20)  # 폰트 설정
+        font = pygame.font.Font('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/ARCADE.TTF', 20)  # 폰트 설정
         text = font.render(f"X {hp:02}", True, (255, 255, 255))  # 체력 텍스트 렌더링
         screen.blit(self.image, self.rect)  # 이미지 그리기
         screen.blit(text, (self.rect.right, self.rect.centery - 7))  # 텍스트 그리기
@@ -99,8 +99,8 @@ class Pop:
         screen.blit(self.image, self.rect)
 
 def draw_pause(screen, screen_width, screen_height):
-    font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 100)  # 폰트 설정
-    sub_font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 30)
+    font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 100)  # 폰트 설정
+    sub_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 30)
 
     paused_text = font.render("Paused", True, (255, 255, 255))
     back_to_menu_txt = sub_font.render("Back to Menu",True,(255,255,255))
@@ -116,21 +116,21 @@ def draw_pause(screen, screen_width, screen_height):
     return back_to_menu_txt_rect, exit_txt_rect
 
 def draw_score(screen, score, x, y):
-    font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 20)  # 폰트 설정
+    font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 20)  # 폰트 설정
     text = font.render(f"Score : {score:000005}", True, (255, 255, 255))  # 점수 텍스트 렌더링
     screen.blit(text, (x, y))  # 화면에 텍스트 그리기
 
 def draw_time(screen, time, x, y):
     second = math.floor(time / 1000)
     minutes = math.floor(time / (1000 * 60))
-    font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 20)  # 폰트 설정
+    font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 20)  # 폰트 설정
     text = font.render(f"time : {minutes:02}:{second:02}", True, (255, 255, 255))  # 시간 텍스트 렌더링
     screen.blit(text, (x, y))
 
 def draw_menu(screen, screen_width, screen_height,id):
-    main_font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 60) # 폰트 설정
-    sub_font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 40)
-    mini_font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 10)
+    main_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 60) # 폰트 설정
+    sub_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 40)
+    mini_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 10)
 
     title_text = main_font.render("HeHeBalSsa", True, (255, 255, 255))
     start_text = sub_font.render("Game Start", True, (255, 255, 255))
@@ -157,13 +157,13 @@ def draw_menu(screen, screen_width, screen_height,id):
 def draw_leaderboard(screen, screen_width, screen_height, data):
     screen_width, screen_height = 800, 600
     screen = pygame.display.set_mode((screen_width, screen_height))
-    leaderboard_bg = pygame.image.load('C:/Users/MSI/DE30-3nd-4/game/source/leaderboard_bg.jpg')
+    leaderboard_bg = pygame.image.load('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/leaderboard_bg.jpg')
     leaderboard_bg = pygame.transform.scale(leaderboard_bg, (screen_width, screen_height))
     screen.blit(leaderboard_bg, (0, 0))
     
-    main_font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 60) # 폰트 설정
-    sub_font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 40)
-    mini_font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 20)
+    main_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 60) # 폰트 설정
+    sub_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 40)
+    mini_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 20)
 
     back_text = mini_font.render("Back", True, (255, 255, 255))
     back_rect = back_text.get_rect(center=(screen_width // 2, screen_height- 20))
@@ -201,9 +201,9 @@ def draw_leaderboard(screen, screen_width, screen_height, data):
 
 
 def draw_my_info(screen, screen_width, screen_height, user_id):
-    main_font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 60)  # 폰트 설정
-    sub_font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 40)
-    mini_font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 20)
+    main_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 60)  # 폰트 설정
+    sub_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 40)
+    mini_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 20)
     
     body = {
         "user_or_game_id": user_id
@@ -254,8 +254,8 @@ def draw_my_info(screen, screen_width, screen_height, user_id):
         return None
 
 def login_page_login_and_legister(screen, screen_width, screen_height):
-    main_font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 40) # 폰트 설정
-    sub_font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 20)
+    main_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/ARCADE.TTF', 40) # 폰트 설정
+    sub_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/ARCADE.TTF', 20)
 
     login_text = main_font.render("Login", True, (255, 255, 255))
     login_rect = login_text.get_rect(center=(screen_width // 2 , screen_height // 3 + 200))
@@ -268,8 +268,8 @@ def login_page_login_and_legister(screen, screen_width, screen_height):
     return login_rect, register_rect
 
 def draw_register_page(screen, screen_width,screen_height):
-    main_font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 40) # 폰트 설정
-    sub_font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 20)
+    main_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 40) # 폰트 설정
+    sub_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 20)
 
     create_account_text = main_font.render("Create Account", True, (255, 255, 255))
     back_text = sub_font.render("Back", True, (255, 255, 255))
@@ -292,7 +292,7 @@ class TextInputBox:
         self.txt_surface = self.font.render(self.text, True, self.color)
         self.active = False
         self.is_password = is_password
-        self.sub_font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 20)
+        self.sub_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/ARCADE.TTF', 20)
 
     def handle_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -397,7 +397,7 @@ def main():
     pygame.display.set_caption("히히발싸")
 
     # 폰트 설정
-    font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 30)
+    font = pygame.font.Font('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/ARCADE.TTF', 30)
 
     # 로그인창 텍스트박스 생성
     id_box = TextInputBox(screen_width // 2 - 100, screen_height // 2 - 50, 200, 32, font)
@@ -410,7 +410,7 @@ def main():
     register_boxes = [register_id_box, register_pw_box]
 
     # GIF 로드
-    gif_path = "C:/Users/MSI/DE30-3nd-4/game/source/gif_bg.gif"
+    gif_path = "C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/gif_bg.gif"
     gif_frames = load_gif_frames(gif_path)
     current_frame = 0
     frame_delay = 5
@@ -420,10 +420,10 @@ def main():
     initialize_game(screen_width,screen_height)
 
     # 배경 설정
-    game_bg = pygame.image.load('C:/Users/MSI/DE30-3nd-4/game/source/screen.jpg')
+    game_bg = pygame.image.load('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/screen.jpg')
     game_bg = pygame.transform.scale(game_bg, (screen_width, screen_height))
 
-    menu_bg = pygame.image.load('C:/Users/MSI/DE30-3nd-4/game/source/menu.jpg')
+    menu_bg = pygame.image.load('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/menu.jpg')
     menu_bg = pygame.transform.scale(menu_bg, (screen_width, screen_height))
 
     # 화면 흔들림 관련 변수
