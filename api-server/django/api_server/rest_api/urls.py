@@ -2,6 +2,16 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('user/', views.user_list, name='user-list'),
-    path('game/', views.game_list, name='game-list'),
+    path('register/', views.register),
+    path('login/', views.login),
+    path('user/', views.user),
+    path('game/', views.game),
+    path('usergames/', views.usergames),
+    path('leaderboard/', views.leaderboard),
+    path('savegame/', views.savegame),
+
+    path('users/', views.all_users),
+    path('games/', views.all_games),
+    path('update/', views.update),
+
 ]
