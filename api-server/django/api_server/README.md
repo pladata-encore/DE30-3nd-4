@@ -6,7 +6,7 @@
 - /api/game/ : 게임 정보
 - /api/usergames/ : 특정 유저의 게임 정보
 - /api/leaderboard/ : 리더보드
-- /api/save/ : 게임 기록 저장
+- /api/savegame/ : 게임 기록 저장
 - ~~/api/users/ : 모든 유저 정보~~
 - ~~/api/games/ : 모든 게임 정보~~
 - ~~/api/update/ : 유저 정보 갱신~~
@@ -238,6 +238,8 @@
 - Request
   - Method: `GET`
   - URL: `/api/leaderboard/`
+  - query:
+    - n: 출력할 상위 n명, default: 10
 - Response
   - Status: `200`
   - Body:
@@ -278,7 +280,7 @@
 #### 플레이한 유저의 정보, 전체 유저의 순위 update 포함
 - Request
   - Method: `POST`
-  - URL: `/api/save/`
+  - URL: `/api/savegame/`
   - Body:
     ```json
     {
@@ -306,10 +308,11 @@
     }
     ```
 ## 개발/디버그 용 API
-### 모든 사용자 정보 가져오기
+### 모든 유저 정보 가져오기
 - Request
   - Method: `GET`
   - URL: `/api/users/`
+  - query: x
 - Response
   - Status: `200`
   - Body: 
@@ -340,6 +343,7 @@
 - Request
   - Method: `GET`
   - URL: `/api/games/`
+  - query: x
 - Response
   - Status: `200`
   - Body: 
