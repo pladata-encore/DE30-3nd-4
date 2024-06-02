@@ -1,5 +1,63 @@
+# Django API server 사용 방법
+## 개발 환경
+- python version: 3.10
+- OS: Windows 10
+- IDE: pycharm
+- packages:
+  - asgiref==3.8.1
+  - Django==5.0.6
+  - djangorestframework==3.15.1
+  - mysqlclient==2.2.4
+  - pip==24.0
+  - setuptools==65.5.0
+  - sqlparse==0.5.0
+  - tzdata==2024.1
+## 설치 과정
+#### * 본 repository의 django project 이름은 'api_server', APP 이름은 'rest_api'.
+### 1. 프로젝트 및 앱 생성
+1. 프로젝트 root로 사용할 디렉토리 생성
+2. 터미널을 실행하고 현재경로를 프로젝트 root로 지정
+3. 터미널에서 `python -m venv [가상환경이름]` 입력하여 가상환경 생성
+4. `.\[가상환경이름]\Scripts\activate` 입력하여 가상환경 실행
+5. requirements.txt 파일을 프로젝트 root에 두기
+6. `pip install -r .\requirements.txt` 입력하여 필요한 패키지 설치
+7. `django-admin startproject [프로젝트이름] .` 입력하여 현재 경로에 django 프로젝트 생성
+8. `python manage.py startapp [앱이름]` 입력하여 현재 경로에 앱 생성
+9. `python manage.py runserver` 입력하여 서버 실행했다가 종료
+#### Directory Tree
+- root<br>
+&nbsp;&nbsp;&nbsp;|----[가상환경폴더]<br>
+&nbsp;&nbsp;&nbsp;|<br>
+&nbsp;&nbsp;&nbsp;|----[프로젝트폴더]<br>
+&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|----프로젝트 파일들<br>
+&nbsp;&nbsp;&nbsp;|<br>
+&nbsp;&nbsp;&nbsp;|----[앱폴더]<br>
+&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|<br>
+&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|----앱 파일들<br>
+&nbsp;&nbsp;&nbsp;|<br>
+&nbsp;&nbsp;&nbsp;|----manage.py<br>
+&nbsp;&nbsp;&nbsp;|<br>
+&nbsp;&nbsp;&nbsp;|----requirements.txt
+### 2. [프로젝트폴더]\settings.py, urls.py : 프로젝트 설정 파일 수정
+- 본 repository의 파일을 그대로 덮어쓰지 않고 참고만 하여,
+- 찾기 기능을 활용하여 MODIFY로 주석처리된 부분만 수정합니다.
+### 3. 나머지 파일들 : 덮어쓰기
+### 4. 관리자 계정 만들기
+- `python manage.py createsuperuser`
+### 5. DB에 적용할 변경사항을 마이그레이션 파일로 생성
+- `python manage.py makemigrations`
+### 6. 마이그레이션 파일을 실제 DB에 적용
+- `python manage.py migrate`
+- -> Django 모델 정의가 데이터베이스 테이블로 변환된다!
+### 7. 서버 실행
+- `python manage.py runserver 0.0.0.0:[port]`
+- 지정한 ip와 port로 서버를 엽니다.
+- 비우면 기본값 localhost:8000
+
+
 # API 명세서
-## API 일람
+## 전체 API 일람
 - /api/register/ : 회원가입
 - /api/login/ : 로그인
 - /api/user/ : 유저 정보
