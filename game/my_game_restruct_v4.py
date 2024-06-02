@@ -200,64 +200,58 @@ def draw_leaderboard(screen, screen_width, screen_height, data):
     return back_rect
 
 
-def draw_my_info(screen,screen_width,screen_height,id):
-    main_font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 60) # 폰트 설정
+def draw_my_info(screen, screen_width, screen_height, user_id):
+    main_font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 60)  # 폰트 설정
     sub_font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 40)
     mini_font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 20)
-    body = {
-            "user_or_game_id": id
-            }
-    url = "http://218.50.12.225:8000/api/usergames/"
-    response = requests.post(url,body)
-    game_data = response.json()
-
-
-    game_data = response.json()
     
-    best_score_data = max(game['score'] for game in game_data)
-    average_score_data = sum(game['score'] for game in game_data) / len(game_data)
-    total_elapsed_time = sum(game['elapsed_time'] for game in game_data)
-    average_elapsed_time = total_elapsed_time / len(game_data)
-    total_kill_count = sum(game['kill_count'] for game in game_data) / len(game_data)
-    max_kill_count = max(game['kill_count'] for game in game_data)
-    last_play_time = max(datetime.fromisoformat(game['when_played']) for game in game_data)
+    body = {
+        "user_or_game_id": user_id
+    }
+    url = "http://218.50.12.225:8000/api/user/"
+    response = requests.post(url, json=body)
+    
+    if response.status_code == 200:
+        game_data = response.json()
 
-    id_text = sub_font.render(f"ID : {id}",True,(255,255,255))
+        # JSON 데이터에서 필요한 값을 추출
+        name = game_data.get('name', 'Unknown')
+        best_score_data = game_data.get('best_score', 'N/A')
+        average_score_data = game_data.get('average_score', 'N/A')
+        ranking = game_data.get('ranking', 'N/A')
+        play_count = game_data.get('play_count', 'N/A')
 
-    best_score = mini_font.render(f"Best score : {best_score_data}", True, (255, 255, 255))
-    average_score = mini_font.render(f"Average score : {average_score_data}", True, (255, 255, 255))
+        # 텍스트 렌더링
+        id_text = sub_font.render(f"ID : {user_id}", True, (255, 255, 255))
+        name_text = mini_font.render(f"Name : {name}", True, (255, 255, 255))
+        best_score = mini_font.render(f"Best Score : {best_score_data}", True, (255, 255, 255))
+        average_score = mini_font.render(f"Average Score : {average_score_data}", True, (255, 255, 255))
+        ranking_text = mini_font.render(f"Ranking : {ranking}", True, (255, 255, 255))
+        play_count_text = mini_font.render(f"Play Count : {play_count}", True, (255, 255, 255))
+        back_text = mini_font.render("Back", True, (255, 255, 255))
 
-    total_elapsed_time_text = mini_font.render(f"Total Elapsed Time : {total_elapsed_time}", True, (255,255,255))
-    average_elapsed_time = mini_font.render(f"Total Elapsed Time : {total_elapsed_time}", True, (255,255,255))
+        # 텍스트 위치 설정
+        id_text_rect = id_text.get_rect(left=20, centery=(screen_height // 20) * 3)
+        name_text_rect = name_text.get_rect(left=20, centery=(screen_height // 20) * 4)
+        best_score_rect = best_score.get_rect(left=20, centery=(screen_height // 20) * 5)
+        average_score_rect = average_score.get_rect(left=20, centery=(screen_height // 20) * 6)
+        ranking_rect = ranking_text.get_rect(left=20, centery=(screen_height // 20) * 7)
+        play_count_rect = play_count_text.get_rect(left=20, centery=(screen_height // 20) * 8)
+        back_rect = back_text.get_rect(center=(screen_width // 2 - 100, screen_height // 3 + 300))
 
-    total_kill_count_text = mini_font.render(f"Total Kill Count : {total_kill_count}",True, (255,255,255))
-    max_kill_count_text = mini_font.render(f"Best Kill Count : {max_kill_count}",True,(255,255,255))
+        # 화면에 텍스트 그리기
+        screen.blit(id_text, id_text_rect)
+        screen.blit(name_text, name_text_rect)
+        screen.blit(best_score, best_score_rect)
+        screen.blit(average_score, average_score_rect)
+        screen.blit(ranking_text, ranking_rect)
+        screen.blit(play_count_text, play_count_rect)
+        screen.blit(back_text, back_rect)
 
-    last_play_time_text = mini_font.render(f"Latest Play Time : {last_play_time}",True,(255,255,255))
-
-    back_text = mini_font.render("Back", True, (255, 255, 255))
-
-
-    id_text_rect = id_text.get_rect(left=20, centery = (screen_height // 20)*3)
-    best_score_rect = best_score.get_rect(left=20, centery = (screen_height // 20)*6)
-    average_score_rect = average_score.get_rect(left=20, centery = (screen_height // 20)*7)
-    total_elapsed_time_rect = total_elapsed_time_text.get_rect(left=20, centery = (screen_height // 20)*8)
-    average_elapsed_rect = average_elapsed_time.get_rect(left=20, centery = (screen_height // 20)*9)
-    total_kill_count_rect = total_kill_count_text.get_rect(left=20, centery = (screen_height // 20)*10)
-    max_kill_count_rect = max_kill_count_text.get_rect(left=20, centery = (screen_height // 20)*11)
-    last_play_time_rect = last_play_time_text.get_rect(left=20, centery = (screen_height // 20)*12)
-    back_rect = back_text.get_rect(center=(screen_width // 2-100, screen_height // 3 + 300))
-
-    screen.blit(id_text,id_text_rect)
-    screen.blit(best_score,best_score_rect)
-    screen.blit(average_score,average_score_rect)
-    screen.blit(total_elapsed_time_text,total_elapsed_time_rect)
-    screen.blit(average_elapsed_time,average_elapsed_rect)
-    screen.blit(total_kill_count_text,total_kill_count_rect)
-    screen.blit(max_kill_count_text,max_kill_count_rect)
-    screen.blit(last_play_time_text,last_play_time_rect)
-    screen.blit(back_text,back_rect)
-    return back_rect
+        return back_rect
+    else:
+        print(f"Failed to fetch user data: {response.status_code}")
+        return None
 
 def login_page_login_and_legister(screen, screen_width, screen_height):
     main_font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 40) # 폰트 설정
@@ -511,7 +505,7 @@ def main():
                             response = requests.post(url, json=json_data)
                             print(f"Response: {response.status_code}, {response.text}")
                             if response.status_code == 200:
-                                user_id = response.json().get("user_or_game_id")
+                                user_id = response.json().get("user_id")
                                 print("Login successful")
                                 is_login_page = False
                                 is_menu_page = True
