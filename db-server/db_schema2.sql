@@ -1,0 +1,1 @@
+SELECT * FROM mini2.users;
