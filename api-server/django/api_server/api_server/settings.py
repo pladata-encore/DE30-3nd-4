@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-z8l@*9oot+wy!0m&x8niu93+ww7-zz686ad6iv&avhye%e0e9&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*"]   # MODIFY
 
 
 # Application definition
@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_api',
-    'rest_framework',
+    'rest_api',     # MODIFY: insert your app name
+    'rest_framework',   # MODIFY: Add 'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -77,12 +77,12 @@ WSGI_APPLICATION = 'api_server.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'hehebalssa',
-        'USER': 'root',
-        'PASSWORD': '7276',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.mysql',   # MODIFY
+        'NAME': 'hehebalssa',   # MODIFY: insert your external mysql DB name
+        'USER': 'root',         # MODIFY: insert your external mysql account username
+        'PASSWORD': '7276',     # MODIFY: insert your external mysql account password
+        'HOST': '127.0.0.1',    # MODIFY: insert your external mysql DB server's IP
+        'PORT': '3306',         # MODIFY: insert your external mysql DB server's port
     }
 }
 
@@ -111,7 +111,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Asia/Seoul'
+TIME_ZONE = 'Asia/Seoul'    # MODIFY
 
 USE_I18N = True
 
