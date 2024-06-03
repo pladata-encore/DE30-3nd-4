@@ -208,7 +208,7 @@ def draw_my_info(screen, screen_width, screen_height, user_id):
     body = {
         "user_or_game_id": user_id
     }
-    url = "http://218.50.12.225:8000/api/user/"
+    url = "http://192.168.0.40:8000/api/user/"
     response = requests.post(url, json=body)
     
     if response.status_code == 200:
@@ -459,6 +459,9 @@ def main():
     # 일시정지 여부
     paused = False
 
+    # 미사일 리스트
+    missiles = []
+
     login_failed = False
     fail_message_time = 0
     shake = False
@@ -500,7 +503,7 @@ def main():
                             "name": username,
                             "password": password
                         }
-                        url = "http://218.50.12.225:8000/api/login/"
+                        url = "http://192.168.0.40:8000/api/login/"
                         try:
                             response = requests.post(url, json=json_data)
                             print(f"Response: {response.status_code}, {response.text}")
@@ -538,7 +541,7 @@ def main():
                             "name": username,
                             "password": password
                         }
-                        url = "http://218.50.12.225:8000/api/register/"
+                        url = "http://192.168.0.40:8000/api/register/"
                         response = requests.post(url, json=json_data)
                         if response.status_code == 200:
                             print("Account created")
@@ -632,7 +635,7 @@ def main():
                         is_myinfo = True
         if is_menu_page == False and is_LB:
             # URL 및 데이터 가져오기
-            url = "http://218.50.12.225:8000/api/leaderboard/"
+            url = "http://192.168.0.40:8000/api/leaderboard/"
             try:
                 response = requests.get(url)
                 response.raise_for_status()
@@ -764,13 +767,13 @@ def main():
                                 "elapsed_time": event_start_time,
                                 "score": score
                                 }
-                    url = "http://218.50.12.225:8000/api/savegame/"
+                    url = "http://192.168.0.40:8000/api/savegame/"
                     response = requests.post(url, json=game_data)
 
                     key_data = {
                     "SECRET_KEY": "7276"
                     }
-                    url = "http://218.50.12.225:8000/api/update/"
+                    url = "http://192.168.0.40:8000/api/update/"
                     response = requests.post(url, json=key_data)
                     is_game_over = False
         pygame.display.flip()
