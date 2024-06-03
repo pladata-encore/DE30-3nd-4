@@ -28,7 +28,7 @@ class Airplane():
 
 class Missile:
     def __init__(self, x, y):
-        self.image = pygame.image.load('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/bullet_1.png')
+        self.image = pygame.image.load('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/bullet_1.png')
         self.image = pygame.transform.scale(self.image, (20, 20))
         self.rect = self.image.get_rect()
         self.rect.center = (x, y)
@@ -43,7 +43,7 @@ class Missile:
 
 class Ailens:
     def __init__(self, screen_width):
-        self.image = pygame.image.load('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/enemy.png')
+        self.image = pygame.image.load('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/enemy.png')
         self.image = pygame.transform.scale(self.image, (30, 30))
         self.rect = self.image.get_rect()
         self.rect.x = random.randrange(screen_width - self.rect.width)  # x 위치 랜덤 설정
@@ -59,7 +59,7 @@ class Ailens:
 
 class Red_Aliens():
     def __init__(self, screen_width):
-        self.image = pygame.image.load('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/red_enemy.png')
+        self.image = pygame.image.load('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/red_enemy.png')
         self.image = pygame.transform.scale(self.image, (30, 30))
         self.rect = self.image.get_rect()
         self.rect.x = random.randrange(screen_width - self.rect.width)  # x 위치 랜덤 설정
@@ -99,8 +99,8 @@ class Pop:
         screen.blit(self.image, self.rect)
 
 def draw_pause(screen, screen_width, screen_height):
-    font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 100)  # 폰트 설정
-    sub_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 30)
+    font = pygame.font.Font('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/ARCADE.TTF', 100)  # 폰트 설정
+    sub_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/ARCADE.TTF', 30)
 
     paused_text = font.render("Paused", True, (255, 255, 255))
     back_to_menu_txt = sub_font.render("Back to Menu",True,(255,255,255))
@@ -116,21 +116,21 @@ def draw_pause(screen, screen_width, screen_height):
     return back_to_menu_txt_rect, exit_txt_rect
 
 def draw_score(screen, score, x, y):
-    font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 20)  # 폰트 설정
+    font = pygame.font.Font('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/ARCADE.TTF', 20)  # 폰트 설정
     text = font.render(f"Score : {score:000005}", True, (255, 255, 255))  # 점수 텍스트 렌더링
     screen.blit(text, (x, y))  # 화면에 텍스트 그리기
 
 def draw_time(screen, time, x, y):
     second = math.floor(time / 1000)
     minutes = math.floor(time / (1000 * 60))
-    font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 20)  # 폰트 설정
+    font = pygame.font.Font('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/ARCADE.TTF', 20)  # 폰트 설정
     text = font.render(f"time : {minutes:02}:{second:02}", True, (255, 255, 255))  # 시간 텍스트 렌더링
     screen.blit(text, (x, y))
 
 def draw_menu(screen, screen_width, screen_height,id):
-    main_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 60) # 폰트 설정
-    sub_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 40)
-    mini_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 10)
+    main_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/ARCADE.TTF', 60) # 폰트 설정
+    sub_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/ARCADE.TTF', 40)
+    mini_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/ARCADE.TTF', 10)
 
     title_text = main_font.render("HeHeBalSsa", True, (255, 255, 255))
     start_text = sub_font.render("Game Start", True, (255, 255, 255))
@@ -161,9 +161,9 @@ def draw_leaderboard(screen, screen_width, screen_height, data):
     leaderboard_bg = pygame.transform.scale(leaderboard_bg, (screen_width, screen_height))
     screen.blit(leaderboard_bg, (0, 0))
     
-    main_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 60) # 폰트 설정
-    sub_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 40)
-    mini_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 20)
+    main_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/ARCADE.TTF', 60) # 폰트 설정
+    sub_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/ARCADE.TTF', 40)
+    mini_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/ARCADE.TTF', 20)
 
     back_text = mini_font.render("Back", True, (255, 255, 255))
     back_rect = back_text.get_rect(center=(screen_width // 2, screen_height- 20))
@@ -201,9 +201,9 @@ def draw_leaderboard(screen, screen_width, screen_height, data):
 
 
 def draw_my_info(screen, screen_width, screen_height, user_id):
-    main_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 60)  # 폰트 설정
-    sub_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 40)
-    mini_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 20)
+    main_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/ARCADE.TTF', 60)  # 폰트 설정
+    sub_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/ARCADE.TTF', 40)
+    mini_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/ARCADE.TTF', 20)
     
     body = {
         "user_or_game_id": user_id
@@ -268,8 +268,8 @@ def login_page_login_and_legister(screen, screen_width, screen_height):
     return login_rect, register_rect
 
 def draw_register_page(screen, screen_width,screen_height):
-    main_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 40) # 폰트 설정
-    sub_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdDE30-3nd-4/game/source/ARCADE.TTF', 20)
+    main_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/ARCADE.TTF', 40) # 폰트 설정
+    sub_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rdD/E30-3nd-4/game/source/ARCADE.TTF', 20)
 
     create_account_text = main_font.render("Create Account", True, (255, 255, 255))
     back_text = sub_font.render("Back", True, (255, 255, 255))
@@ -588,7 +588,7 @@ def main():
         if login_failed:
             fail_duration = 2000 
             if pygame.time.get_ticks() - fail_message_time < fail_duration:
-                fail_font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 30)
+                fail_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/ARCADE.TTF', 30)
                 fail_text = fail_font.render("Login Failed", True, (255, 0, 0))
                 screen.blit(fail_text, (screen_width // 2 - fail_text.get_width() // 2, screen_height // 2 + 50))
             else:
@@ -596,7 +596,7 @@ def main():
         if register_failed:
             register_fail_duration = 2000 
             if pygame.time.get_ticks() - register_fail_message_time < register_fail_duration:
-                fail_font = pygame.font.Font('C:/Users/MSI/DE30-3nd-4/game/source/ARCADE.TTF', 30)
+                fail_font = pygame.font.Font('C:/Users/Playdata/Desktop/3rd/DE30-3nd-4/game/source/ ARCADE.TTF', 30)
                 fail_text = fail_font.render("Same ID Already Exist", True, (255, 0, 0))
                 screen.blit(fail_text, (screen_width // 2 - fail_text.get_width() // 2, screen_height // 2 + 50))
             else:
@@ -681,6 +681,7 @@ def main():
                     if event.key == pygame.K_SPACE and event_start_time - last_fired_time > missile_cooldown:
                         missile = Missile(plane.rect.centerx, plane.rect.top)
                         missiles.append(missile)
+                        # missile.draw(screen)
                         last_fired_time = event_start_time
                     if event.key == pygame.K_p and not paused:
                         paused = True
@@ -759,6 +760,7 @@ def main():
 
                 draw_score(screen, score, screen_width - 130, 10)
                 draw_time(screen, event_start_time, 10, screen_height - 30)
+                pygame.display.flip()
                 if is_game_over:
                     game_data = {
                                 "user_or_game_id": user_id,
