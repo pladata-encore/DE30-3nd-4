@@ -16,11 +16,12 @@
 #### * 본 repository의 django project 이름은 'api_server', APP 이름은 'rest_api'.
 ### 1. 프로젝트 및 앱 생성
 1. 프로젝트 root로 사용할 디렉토리 생성
-2. 터미널을 실행하고 현재경로를 프로젝트 root로 지정
+2. 터미널을 실행하고 프로젝트 root로 경로 이동
 3. 터미널에서 `python -m venv [가상환경이름]` 입력하여 가상환경 생성
 4. `.\[가상환경이름]\Scripts\activate` 입력하여 가상환경 실행
 5. requirements.txt 파일을 프로젝트 root에 두기
-6. `pip install -r .\requirements.txt` 입력하여 필요한 패키지 설치
+6. `pip install -r .\requirements.txt` 입력하여 필요한 패키지 설치<br>
+   (pip 업데이트 필요 시 업데이트 후 재입력) 
 7. `django-admin startproject [프로젝트이름] .` 입력하여 현재 경로에 django 프로젝트 생성
 8. `python manage.py startapp [앱이름]` 입력하여 현재 경로에 앱 생성
 9. `python manage.py runserver` 입력하여 서버 실행했다가 종료
@@ -38,19 +39,21 @@
 &nbsp;&nbsp;&nbsp;|<br>
 &nbsp;&nbsp;&nbsp;|----manage.py<br>
 &nbsp;&nbsp;&nbsp;|<br>
-&nbsp;&nbsp;&nbsp;|----requirements.txt
+&nbsp;&nbsp;&nbsp;|<br>
+&nbsp;&nbsp;&nbsp;|----db.sqlite3
 ### 2. [프로젝트폴더]\settings.py, urls.py : 프로젝트 설정 파일 수정
 - 본 repository의 파일을 그대로 덮어쓰지 않고 참고만 하여,
 - 찾기 기능을 활용하여 MODIFY로 주석처리된 부분만 수정합니다.
 ### 3. 나머지 파일들 : 덮어쓰기
-### 4. 관리자 계정 만들기
-- `python manage.py createsuperuser`
+### 4. 외부 MySQL DB 서버에 settings.py에 수정한 내용들을 바탕으로 접근가능한지 확인
 ### 5. DB에 적용할 변경사항을 마이그레이션 파일로 생성
 - `python manage.py makemigrations`
 ### 6. 마이그레이션 파일을 실제 DB에 적용
 - `python manage.py migrate`
 - -> Django 모델 정의가 데이터베이스 테이블로 변환된다!
-### 7. 서버 실행
+### 7. 관리자 계정 만들기
+- `python manage.py createsuperuser`
+### 8. 서버 실행
 - `python manage.py runserver 0.0.0.0:[port]`
 - 지정한 ip와 port로 서버를 엽니다.
 - 비우면 기본값 localhost:8000
