@@ -18,7 +18,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', include('rest_api.urls')),     # MODIFY: '[앱이름].urls'로 수정
+    path('administration/', admin.site.urls),
+
+    # MODIFY: rest_api -> [앱이름]
+    path('admin/', include('rest_api.views.admin_urls')),
+    path('auth/', include('rest_api.views.auth_urls')),
+    path('game/', include('rest_api.views.game_urls')),
+    path('lookup/', include('rest_api.views.lookup_urls')),
 ]
