@@ -84,7 +84,7 @@ def login(request):
             else:
                 # 에러메시지, 403 반환
                 return JsonResponse({
-                    "message": "Incoreect password."
+                    "message": "Incorrect password."
                 }, status=403)
         # 존재하지 않으면,
         else:
@@ -105,3 +105,46 @@ def login(request):
             return JsonResponse({
                 "message": "Bad Request"
             }, status=400)
+
+
+@api_view(['POST'])
+def withdrawal(request):
+    inputNamePWSerializer = InputNamePWSerializer(data=request.data)
+    # 전달 받은 Body가 형식에 올바른지 판단
+    # 올바르면,
+    if inputNamePWSerializer.is_valid():
+        input_name = inputNamePWSerializer.validated_data['name']
+        input_password = inputNamePWSerializer.validated_data['password']
+        # ID가 DB에 존재하는지 판단
+        # 존재하면,
+        if User.objects.filter(name=input_name).exists():
+            # ID에 해당하는 User 객체 받아오기
+            user = User.objects.get(name=input_name)
+            # ID에 해당하는 password와 입력받은 password가 일치하는지 판단
+            # 일치하면,
+            if input_password == user.password:
+                # 계정 삭제
+                user.delete()
+                # 삭제 완료 메시지, 200 반환
+                responseBody = {
+                    "message": "User was deleted."
+                }
+                return JsonResponse(responseBody, status=200)
+            # 일치하지 않으면,
+            else:
+                # 에러메시지, 403 반환
+                return JsonResponse({
+                    "message": "Incorrect password."
+                }, status=403)
+        # 존재하지 않으면,
+        else:
+            # 에러메시지, 409 반환
+            return JsonResponse({
+                "message": "ID does not exist."
+            }, status=409)
+    # 올바르지 않으면,
+    else:
+        # 에러메시지, 400 반환
+        return JsonResponse({
+            "message": "Bad Request"
+        }, status=400)

@@ -64,6 +64,7 @@
 ### /auth/
 - register/ : (POST)회원가입
 - login/ : (POST)로그인
+- withdrawal/ : (POST)계정삭제
 ### /game/
 - savegame/ : (POST)게임 기록 저장
 - leaderboard/ : (GET)리더보드
@@ -163,6 +164,50 @@
       ```json
       {
         "message": "Input is empty or exceeded 20 characters."
+      }
+      ```
+  - Status: `400`
+    - 그 외의 error들
+    - Body:
+      ```json
+      {
+        "message": "Bad Request"
+      }
+      ```
+### /auth/withdrawal/
+#### 계정삭제
+- Request
+  - Method: `POST`
+  - Body:
+    ```json
+    {
+      "name": "john",
+      "password": "1q"
+    }
+    ```
+- Response
+  - Status: `200`
+  - Body:
+    ```json
+    {
+      "message": "User was deleted."
+    }
+    ```
+- Error Response
+  - Status: `403`
+    - password가 일치하지 않음
+    - Body:
+      ```json
+      {
+        "message": "Incorrect password."
+      }
+      ```
+  - Status: `409`
+    - ID가 존재하지 않음
+    - Body:
+      ```json
+      {
+        "message": "ID does not exist."
       }
       ```
   - Status: `400`
