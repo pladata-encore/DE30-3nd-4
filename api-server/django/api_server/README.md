@@ -59,23 +59,28 @@
 - 비우면 기본값 localhost:8000
 
 
-# API 명세서
-## 전체 API 일람
-- /api/register/ : 회원가입
-- /api/login/ : 로그인
-- /api/user/ : 유저 정보
-- /api/game/ : 게임 정보
-- /api/usergames/ : 특정 유저의 게임 정보
-- /api/leaderboard/ : 리더보드
-- /api/savegame/ : 게임 기록 저장
-- ~~/api/users/ : 모든 유저 정보~~
-- ~~/api/games/ : 모든 게임 정보~~
-- ~~/api/update/ : 유저 정보 갱신~~
-## 노출될 API
-### 회원가입
+# API Documentation
+## Endpoint
+### /auth/
+- register/ : (POST)회원가입
+- login/ : (POST)로그인
+### /game/
+- savegame/ : (POST)게임 기록 저장
+- leaderboard/ : (GET)리더보드
+### /lookup/
+- user/ : (POST)유저 정보 조회
+- game/ : (POST)게임 정보 조회
+- usergames/ : (POST)특정 유저 모든 게임 정보 조회
+### ~~~/admin/~~~
+- ~~/admin/users/ : (GET)모든 유저 정보 조회~~
+- ~~/admin/games/ : (GET)모든 게임 정보 조회~~
+- ~~/admin/update/ : (POST)유저 정보 갱신~~
+
+## API Specification
+### /auth/register/
+#### 회원가입
 - Request
   - Method: `POST`
-  - URL: `/api/register/`
   - Body:
     ```json
     {
@@ -116,10 +121,10 @@
         "message": "Bad Request"
       }
       ```
-### 로그인
+### /auth/login/
+#### 로그인
 - Request
   - Method: `POST`
-  - URL: `/api/login/`
   - Body:
     ```json
     {
@@ -168,10 +173,83 @@
         "message": "Bad Request"
       }
       ```
-### 유저 정보
+### /game/savegame/
+#### 플레이한 유저의 정보(전체 유저의 순위 update 포함)
 - Request
   - Method: `POST`
-  - URL: `/api/user/`
+  - Body:
+    ```json
+    {
+      "user_id": 5,
+      "when_played": "2024-06-02T15:30:00Z",
+      "kill_count": 5,
+      "elapsed_time": 12.34,
+      "score": 150
+    }
+    ```
+- Response
+  - Status: `200`
+  - Body:
+    ```json
+    {
+      "message": "Game log added, User game statistics and Entire user's rankings updated successfully."
+    }
+    ```
+- Error Response
+  - Status: `400`
+  - Body:
+    ```json
+    {
+      "message": "Bad Request"
+    }
+    ```
+
+### /game/savegame/
+#### 랭킹 상위 n명의 유저 정보
+- Request
+  - Method: `GET`
+  - query:
+    - n: 출력할 상위 n명, default: 10
+- Response
+  - Status: `200`
+  - Body:
+    ```json
+    [
+      {
+        "name": "john",
+        "best_score": 999,
+        "average_score": 456.6,
+        "ranking": 1,
+        "play_count": 5
+      },
+      {
+        "name": "jane",
+        "best_score": 888,
+        "average_score": 433.6,
+        "ranking": 2,
+        "play_count": 31
+      },
+      {
+        "name": "doe",
+        "best_score": 777,
+        "average_score": 231.6,
+        "ranking": 3,
+        "play_count": 15
+      },
+      {
+        "name": "doee",
+        "best_score": 666,
+        "average_score": 123.6,
+        "ranking": 4,
+        "play_count": 123
+      },
+      ...
+    ]
+    ```
+### /lookup/user/
+#### 특정 유저 정보
+- Request
+  - Method: `POST`
   - Body:
     ```json
     {
@@ -207,10 +285,10 @@
         "message": "Bad Request"
       }
       ```
-### 게임 정보
+### /lookup/game/
+#### 특정 게임 정보
 - Request
   - Method: `POST`
-  - URL: `/api/game/`
   - Body:
     ```json
     {
@@ -246,10 +324,10 @@
         "message": "Bad Request"
       }
       ```
-### 특정 유저의 게임 정보
+### /lookup/usergames/
+#### 특정 유저의 게임들
 - Request
   - Method: `POST`
-  - URL: `/api/usergames/`
   - Body:
     ```json
     {
@@ -294,85 +372,10 @@
         "message": "Bad Request"
       }
       ```
-### 리더보드
-#### 랭킹 상위 n명의 유저 정보
+### /admin/users/
+#### 모든 유저 정보
 - Request
   - Method: `GET`
-  - URL: `/api/leaderboard/`
-  - query:
-    - n: 출력할 상위 n명, default: 10
-- Response
-  - Status: `200`
-  - Body:
-    ```json
-    [
-      {
-        "name": "john",
-        "best_score": 999,
-        "average_score": 456.6,
-        "ranking": 1,
-        "play_count": 5
-      },
-      {
-        "name": "jane",
-        "best_score": 888,
-        "average_score": 433.6,
-        "ranking": 2,
-        "play_count": 31
-      },
-      {
-        "name": "doe",
-        "best_score": 777,
-        "average_score": 231.6,
-        "ranking": 3,
-        "play_count": 15
-      },
-      {
-        "name": "doee",
-        "best_score": 666,
-        "average_score": 123.6,
-        "ranking": 4,
-        "play_count": 123
-      },
-      ...
-    ]
-    ```
-### 게임 기록 저장
-#### 플레이한 유저의 정보, 전체 유저의 순위 update 포함
-- Request
-  - Method: `POST`
-  - URL: `/api/savegame/`
-  - Body:
-    ```json
-    {
-      "user_id": 5,
-      "when_played": "2024-06-02T15:30:00Z",
-      "kill_count": 5,
-      "elapsed_time": 12.34,
-      "score": 150
-    }
-    ```
-- Response
-  - Status: `200`
-  - Body:
-    ```json
-    {
-      "message": "Game log added, User game statistics and Entire user's rankings updated successfully."
-    }
-    ```
-- Error Response
-  - Status: `400`
-  - Body:
-    ```json
-    {
-      "message": "Bad Request"
-    }
-    ```
-## 개발/디버그 용 API
-### 모든 유저 정보 가져오기
-- Request
-  - Method: `GET`
-  - URL: `/api/users/`
   - query: x
 - Response
   - Status: `200`
@@ -400,10 +403,10 @@
       ...
     ]
     ```
-### 모든 게임 정보 가져오기
+### /admin/games/
+#### 모든 게임 정보
 - Request
   - Method: `GET`
-  - URL: `/api/games/`
   - query: x
 - Response
   - Status: `200`
@@ -444,11 +447,10 @@
       }
     ]
     ```
-### 유저 정보 갱신
-#### 무작위 값으로 생성한 테스트 데이터들의 값들을 알맞게 수정
+### /admin/update/
+#### 무작위 값으로 생성한 테스트 유저 정보 알맞게 수정
 - Request
   - Method: `POST`
-  - URL: `/api/update/`
   - Body:
     ```json
     {
