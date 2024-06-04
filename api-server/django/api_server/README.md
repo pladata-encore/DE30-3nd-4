@@ -59,8 +59,8 @@
 - 비우면 기본값 localhost:8000
 
 
-# API Documentation
-## Endpoint
+# 👉 API Documentation
+## ❗ Endpoint
 ### /auth/
 - register/ : (POST)회원가입
 - login/ : (POST)로그인
