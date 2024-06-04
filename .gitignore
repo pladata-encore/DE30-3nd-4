@@ -1,5 +1,3 @@
-README.md
-
 api-server/django/api_server/.idea
 api-server/django/api_server/venv
 api-server/django/api_server/db.sqlite3
@@ -18,5 +16,8 @@ api-server/django/api_server/rest_api/apps.py
 api-server/django/api_server/rest_api/tests.py
 
 api-server/django/api_server/rest_api/modules/__pycache__/
+
 api-server/django/api_server/rest_api/views/__pycache__/
 api-server/django/api_server/rest_api/views/__init__.py
+
+api-server/django/api_server/rest_api/urls/__pycache__/
