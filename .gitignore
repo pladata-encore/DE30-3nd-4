@@ -1,25 +1,18 @@
 README.md
 
-api-server\django\api_server\.idea
+api-server/django/api_server/.idea
+api-server/django/api_server/venv
+api-server/django/api_server/db.sqlite3
+api-server/django/api_server/manage.py
 
-api-server\django\api_server\venv
 
-api-server\django\api_server\manage.py
+api-server/django/api_server/api_server/__pycache__
+api-server/django/api_server/api_server/__init__.py
+api-server/django/api_server/api_server/asgi.py
+api-server/django/api_server/api_server/wsgi.py
 
-api-server\django\api_server\api_server\__pycache__
-
-api-server\django\api_server\api_server\__init__.py
-
-api-server\django\api_server\api_server\asgi.py
-
-api-server\django\api_server\api_server\wsgi.py
-
-api-server\django\api_server\rest_api\__pycache__
-
-api-server\django\api_server\rest_api\migrations
-
-api-server\django\api_server\rest_api\__init__.py
-
-api-server\django\api_server\rest_api\apps.py
-
-api-server\django\api_server\rest_api\tests.py
+api-server/django/api_server/rest_api/__pycache__
+api-server/django/api_server/rest_api/migrations
+api-server/django/api_server/rest_api/__init__.py
+api-server/django/api_server/rest_api/apps.py
+api-server/django/api_server/rest_api/tests.py
