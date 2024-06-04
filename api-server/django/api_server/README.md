@@ -1,5 +1,5 @@
-# Django API server 사용 방법
-## 개발 환경
+# 👉 hehebalssa Django backend server
+## ❗ 개발 환경
 - python version: 3.10
 - OS: Windows 10
 - IDE: pycharm
@@ -12,7 +12,7 @@
   - setuptools==65.5.0
   - sqlparse==0.5.0
   - tzdata==2024.1
-## 설치 과정
+## ❗ 설치 과정
 #### * 본 repository의 django project 이름은 'api_server', APP 이름은 'rest_api'.
 ### 1. 프로젝트 및 앱 생성
 1. 프로젝트 root로 사용할 디렉토리 생성
@@ -76,7 +76,7 @@
 - ~~/admin/games/ : (GET)모든 게임 정보 조회~~
 - ~~/admin/update/ : (POST)유저 정보 갱신~~
 
-## API Specification
+## ❗ API Specification
 ### /auth/register/
 #### 회원가입
 - Request
