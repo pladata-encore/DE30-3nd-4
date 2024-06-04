@@ -1,7 +1,7 @@
 # admin/
 
 from django.urls import path
-from .admin_views import all_users, all_games, update
+from rest_api.views.admin_views import all_users, all_games, update
 
 
 urlpatterns = [

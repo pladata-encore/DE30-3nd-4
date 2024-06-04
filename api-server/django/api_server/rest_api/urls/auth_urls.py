@@ -1,7 +1,7 @@
 # auth/
 
 from django.urls import path
-from .auth_views import register, login
+from rest_api.views.auth_views import register, login
 
 
 urlpatterns = [

@@ -23,8 +23,8 @@ urlpatterns = [
     path('administration/', admin.site.urls),
 
     # MODIFY: rest_api -> [앱이름]
-    path('admin/', include('rest_api.views.admin_urls')),
-    path('auth/', include('rest_api.views.auth_urls')),
-    path('game/', include('rest_api.views.game_urls')),
-    path('lookup/', include('rest_api.views.lookup_urls')),
+    path('admin/', include('rest_api.urls.admin_urls')),
+    path('auth/', include('rest_api.urls.auth_urls')),
+    path('game/', include('rest_api.urls.game_urls')),
+    path('lookup/', include('rest_api.urls.lookup_urls')),
 ]

@@ -1,7 +1,7 @@
 # game/
 
 from django.urls import path
-from .game_views import savegame, leaderboard
+from rest_api.views.game_views import savegame, leaderboard
 
 
 urlpatterns = [

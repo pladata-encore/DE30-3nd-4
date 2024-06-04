@@ -1,7 +1,7 @@
 # lookup/
 
 from django.urls import path
-from .lookup_views import user, game, usergames
+from rest_api.views.lookup_views import user, game, usergames
 
 
 urlpatterns = [
