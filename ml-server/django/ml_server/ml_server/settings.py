@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'getscore'
+    'pred_score'
 ]
 
 MIDDLEWARE = [
@@ -52,7 +52,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'dbtoml.urls'
+ROOT_URLCONF = 'ml_server.urls'
 
 TEMPLATES = [
     {
@@ -70,7 +70,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'dbtoml.wsgi.application'
+WSGI_APPLICATION = 'ml_server.wsgi.application'
 
 
 # Database
@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': 'hehebalssa',
         'USER': 'client',
         'PASSWORD': '7276',
-        'HOST': '218.50.12.225',
+        'HOST': '192.168.90.88',
         'PORT': '3306',
     }
 }
@@ -124,10 +124,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # 정적 파일 관리에 대한 코드
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') # 정적 파일 관리에 대한 코드
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'getscore', 'static'),
+    os.path.join(BASE_DIR, 'pred_score', 'static'),
 ]
 
 # Default primary key field type

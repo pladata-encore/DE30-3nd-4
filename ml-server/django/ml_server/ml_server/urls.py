@@ -20,5 +20,5 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('getscore.urls')),
+    path('api/', include('pred_score.urls')),
 ]

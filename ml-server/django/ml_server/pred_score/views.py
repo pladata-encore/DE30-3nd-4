@@ -7,7 +7,7 @@ from pycaret.time_series import *
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from dbtoml import settings
+from ml_server import settings
 from .models import User, Game
 from .serializers import UserSerializer, GameSerializer
 
@@ -51,6 +51,7 @@ def game_list(request):
 
 def preprocess_newdata(data):
     df = pd.DataFrame(data)
+    print(df)
     df = df[['when_played', 'elapsed_time', 'kill_count']]
     df = df.sort_values(by='when_played')
     # print(df)
@@ -59,11 +60,11 @@ def preprocess_newdata(data):
     # df['when_played'] = df['when_played'].apply(lambda x: round_to_nearest_minutes(x))
     df = df.groupby('when_played').agg({'elapsed_time': 'mean', 'kill_count': 'mean'}).reset_index()
     df.columns = ['when_played', 'elapsed_time', 'kill_count']
-    df = df[df['when_played']=='2024-06-03']
+    df = df[df['when_played']=='2024-06-04']
     # print(df)
     df = df.sort_values(by='when_played')
     df.set_index('when_played', inplace=True)
-    # print(df)
+    print(df)
     return df
 
 
@@ -81,7 +82,22 @@ def predict_future_exog(df):
     # 1. 사용할 외생변수 추출
     exog_vars = ['elapsed_time', 'kill_count']
     data = df[exog_vars]
+    data.index = pd.to_datetime(data.index)
+    # print(f"Data type before processing: {type(data)}")
+    # print(data.tail())
+    if not isinstance(data, pd.DataFrame):
+        data = pd.DataFrame(data)
     # print(data)
+    # sktime의 데이터 형식으로 변환
+    # from sktime.datatypes import check_raise
+    # from sktime.datatypes import SCITYPE_REGISTER
+
+    # # 데이터 형식 검사
+    # try:
+    #     check_raise(data, mtype="pd.DataFrame", scitype="Series")
+    # except Exception as e:
+    #     print(f"Data format error: {e}")
+
     # 2 : 외생변수 각각에 대한 시계열 예측 수행
     exog_exps = []
     exog_models = []
@@ -96,19 +112,26 @@ def predict_future_exog(df):
             session_id=42,
             verbose=False,
         )
+        print('**')
         # 모델 비교 및 최종 모델 선택
         best = exog_exp.compare_models(
             sort="mae",
             verbose=False,
         )
+        print('***')
         final_exog_model = exog_exp.finalize_model(best)
         exog_exps.append(exog_exp)
         exog_models.append(final_exog_model)
+
     # 3: 외생 변수에 대한 미래 예측 얻기
     future_exog = [exog_exp.predict_model(exog_model) for exog_exp, exog_model in zip(exog_exps, exog_models)]
+    print(f"future_exog:{future_exog}")
     # 4. 예측값 concat
     future_exog = pd.concat(future_exog, axis=1)
     future_exog.columns = exog_vars
+    # 데이터 형식 확인
+    print(f"Data type after processing: {type(future_exog)}")
+    print(future_exog.head())
     return future_exog
 
 
@@ -126,15 +149,19 @@ def predict_score(request, user_id):
         df_new = preprocess_newdata(serialized_data)
         # 기존의 학습 데이터
         df_already = preprocess_alreadydata('alreadydata.csv')
+        print(f"df_new type: {type(df_new)}, columns: {df_new.columns}")
+        print(f"df_already type: {type(df_already)}, columns: {df_already.columns}")
         df_final = pd.concat([df_already, df_new], axis=0)
-        # print(df_final)
+        # 데이터 형식 확인
+        print(f"df_final type: {type(df_final)}, columns: {df_final.columns}")
+        print(df_final.tail())
         # 예측 외생 변수 도출
         future_exog = predict_future_exog(df_final)
         # print(future_exog)
         # 미래 예측용 시계열 실험 생성
         exp_future = TSForecastingExperiment()
         # 훈련된 PyCaret 모델 로드
-        model_path = os.path.join(settings.STATICFILES_DIRS[0], 'model', 'final_model.pkl')
+        model_path = os.path.join(settings.STATICFILES_DIRS[0], 'model', 'pycaret_model')
         # print(model_path)
         final_slim_model = exp_future.load_model(model_path)
         # 최종 예측
@@ -142,4 +169,8 @@ def predict_score(request, user_id):
             final_slim_model,  # 모델 입력
             X=future_exog,  # 외생변수 입력
         )
-    return future_preds['score']
+        # print(f'future_preds type : {type(future_preds)}, column : {future_preds.columns}')
+        print(future_preds)
+        # 결과를 JSON 형식으로 변환하여 반환
+        predictions_json = future_preds['y_pred'].to_json()
+        return Response(predictions_json, content_type='application/json')
