@@ -1,5 +1,5 @@
 # Views for admin
-
+from django.db.models import Max, Avg
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 
